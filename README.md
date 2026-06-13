@@ -29,6 +29,23 @@ This project analyzes tweets about Apple and Google products (CrowdFlower SXSW T
 - **Explainability:** LIME was used to show which words drive individual predictions, and global feature importances were plotted per sentiment class.
 - **Recommendation:** Use the model as a first-pass triage tool to flag tweets (especially negative ones) for human review, and continue collecting negative-sentiment examples to improve minority-class performance.
 
+## Results
+
+| Model               | Weighted F1 |
+|---------------------|-------------|
+| Naive Bayes         | 0.638       |
+| Logistic Regression | 0.643       |
+| Linear SVC          | 0.661       |
+
+Linear SVC scored slightly higher on weighted F1, but **Logistic Regression** was selected as the final model since the difference is marginal and Logistic Regression offers calibrated probability outputs and easier interpretability for the explainability requirement.
+
+## Limitations & Future Work
+
+- The dataset is relatively small (~9,000 tweets) and imbalanced, with very few "Negative emotion" examples, which limits the model's ability to learn rare negative patterns.
+- A bag-of-words/TF-IDF approach cannot capture sarcasm, irony, or context-dependent sentiment.
+- The dataset is specific to one event (SXSW) and may not generalize to other contexts or time periods.
+- Future work: collect more labeled negative examples, experiment with transformer-based embeddings (e.g., BERT) for context-aware sentiment, and retrain periodically on fresh data.
+
 ## Setup
 
 ```bash
